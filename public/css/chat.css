@@ -1,0 +1,282 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:#fdf6f9;
+    font-family:'Segoe UI',sans-serif;
+}
+
+/* =========================
+   CONTAINER UTAMA
+========================= */
+
+.chat-container{
+    width:100%;
+    max-width:900px;
+    height:95vh;
+    margin:15px auto;
+    background:white;
+    border-radius:25px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    box-shadow:0 8px 30px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   HEADER CHAT
+========================= */
+
+.chat-header{
+    background:#ffc7dc;
+    color:#5c4150;
+    padding:20px;
+    font-size:20px;
+    font-weight:bold;
+    border-bottom:1px solid #f2d7e2;
+}
+
+/* =========================
+   AREA PESAN
+========================= */
+
+.chat-box{
+    flex:1;
+    overflow-y:auto;
+    padding:25px;
+    background:#fffafb;
+
+    display:flex;
+    flex-direction:column;
+}
+
+/* scrollbar cantik */
+
+.chat-box::-webkit-scrollbar{
+    width:6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb{
+    background:#f2c7d7;
+    border-radius:20px;
+}
+
+/* =========================
+   BUBBLE UMUM
+========================= */
+
+.chat-bubble{
+    padding:12px 18px;
+    margin:8px 0;
+    border-radius:20px;
+    max-width:70%;
+    font-size:15px;
+    line-height:1.5;
+    word-break:break-word;
+}
+
+/* pesan saya */
+
+.me{
+    align-self:flex-end;
+    background:#ffcfe0;
+    color:#444;
+    border-bottom-right-radius:8px;
+}
+
+/* pesan lawan */
+
+.other{
+    align-self:flex-start;
+    background:#f7e8ef;
+    color:#444;
+    border-bottom-left-radius:8px;
+}
+
+/* =========================
+   FORM CHAT
+========================= */
+
+.chat-form{
+    background:white;
+    padding:15px;
+    border-top:1px solid #f1e5eb;
+    display:flex;
+    gap:10px;
+}
+
+/* input */
+
+.chat-form input{
+    flex:1;
+    border:none;
+    background:#faf0f4;
+    padding:15px 20px;
+    border-radius:30px;
+    font-size:15px;
+    outline:none;
+}
+
+/* tombol */
+
+.chat-form button{
+    border:none;
+    padding:0 28px;
+    border-radius:30px;
+    background:#ff8eb6;
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.chat-form button:hover{
+    transform:scale(1.03);
+    background:#ff79aa;
+}
+
+/* =========================
+   CHAT LIST
+========================= */
+
+.chat-list{
+    max-width:700px;
+    margin:30px auto;
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.chat-item{
+    display:block;
+    padding:18px;
+    text-decoration:none;
+    color:black;
+    border-bottom:1px solid #f4f4f4;
+    transition:.2s;
+}
+
+.chat-item:hover{
+    background:#fff4f8;
+}
+
+.chat-name{
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.chat-last-message{
+    color:#888;
+    font-size:14px;
+}
+
+.chat-count{
+    font-size:12px;
+    color:#ff8eb6;
+    margin-top:5px;
+}
+
+.chat-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    margin-bottom:15px;
+}
+
+.back-btn{
+    text-decoration:none;
+    background:#f9a8d4;
+    color:white;
+    padding:8px 15px;
+    border-radius:12px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.back-btn:hover{
+    background:#f472b6;
+}
+
+.back-icon{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#fbcfe8;
+    color:#db2777;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.message-text{
+    margin-bottom:4px;
+}
+
+.message-time{
+    font-size:11px;
+    margin-top:4px;
+    opacity:0.7;
+    text-align:right;
+}
+
+.me .message-time{
+    text-align:right;
+}
+
+.other .message-time{
+    text-align:left;
+}
+
+.avatar{
+    width:60px;
+    height:60px;
+    border-radius:50%;
+    overflow:hidden;
+
+    background:linear-gradient(45deg,#ff77b7,#9860ff);
+
+    color:white;
+    font-size:25px;
+    font-weight:bold;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    flex-shrink:0;
+}
+
+.avatar img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.chat-bubble.other{
+    background: white;
+    color: #333;
+    max-width: 300px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    margin-bottom: 12px;
+    margin-right: auto;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+
+.chat-bubble.me{
+    background: #f9c6da;
+    color: #333;
+    max-width: 300px;
+    padding: 14px 18px;
+    border-radius: 18px;
+    margin-left: auto;
+    margin-bottom: 12px;
+}
