@@ -18,4 +18,18 @@ class MessageController extends Controller
 
         return redirect()->back();
     }
+
+    public function destroy(Message $message)
+{
+    // hanya boleh hapus pesan sendiri
+    if ($message->sender_id != Auth::id()) {
+        abort(403);
+    }
+
+    $receiverId = $message->receiver_id;
+
+    $message->delete();
+
+    return redirect()->route('chat.show', $receiverId);
+}
 }

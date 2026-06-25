@@ -6,7 +6,7 @@
 <div class="contact-header">
 
     <h1 class="contact-title">
-        👥 Kontak Anda
+        Kontak Anda
     </h1>
 
     <div class="contact-actions">

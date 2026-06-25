@@ -8,48 +8,88 @@
     </a>
 
     <div>
-        <h3>{{ $user->name }}</h3>
-        <small>Online</small>
-    </div>
+
+    <h3>{{ $user->name }}</h3>
+
+    <small>
+
+        @if($user->last_seen && $user->last_seen->diffInMinutes(now()) < 1)
+
+             Online
+
+        @else
+
+             Offline
+            {{ $user->last_seen?->diffForHumans() }}
+
+        @endif
+
+    </small>
 
 </div>
 
-   <div class="chat-box" id="chatBox">
+</div>
+
+<div class="chat-box" id="chatBox">
 
 @foreach($messages as $msg)
 
     @if($msg->sender_id == auth()->id())
 
         <!-- Pesan saya -->
-        <div class="chat-bubble me">
+        <div class="message-row me-row">
 
-            <div class="message-text">
-                {{ $msg->message }}
+            <div class="chat-bubble me">
+
+                <div class="message-text">
+                    {{ $msg->message }}
+                </div>
+
+                <div class="message-time">
+
+                    {{ $msg->created_at->format('H:i') }}
+
+                    @if($msg->is_read)
+                        ✓✓
+                    @else
+                        ✓
+                    @endif
+
+                </div>
+
             </div>
 
-            <div class="message-time">
-                {{ $msg->created_at->format('H:i') }}
+            <form action="{{ route('message.destroy',$msg->id) }}"
+                  method="POST"
+                  class="delete-form"
+                  onsubmit="return confirm('Hapus pesan ini?')">
 
-                @if($msg->is_read)
-                    ✓✓
-                @else
-                    ✓
-                @endif
-            </div>
+                @csrf
+                @method('DELETE')
+
+                <button type="submit" class="delete-message">
+                    🗑
+                </button>
+
+            </form>
 
         </div>
 
     @else
 
         <!-- Pesan lawan -->
-        <div class="chat-bubble other">
+        <div class="message-row other-row">
 
-            <div class="message-text">
-                {{ $msg->message }}
-            </div>
+            <div class="chat-bubble other">
 
-            <div class="message-time">
-                {{ $msg->created_at->format('H:i') }}
+                <div class="message-text">
+                    {{ $msg->message }}
+                </div>
+
+                <div class="message-time">
+                    {{ $msg->created_at->format('H:i') }}
+                </div>
+
             </div>
 
         </div>

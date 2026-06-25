@@ -5,7 +5,7 @@
 <div class="contact-form-container">
 
     <h2 class="contact-title">
-        👥 Tambah Kontak
+         Tambah Kontak
     </h2>
 
     <form action="{{ route('contacts.store') }}" method="POST">

@@ -280,3 +280,48 @@ body{
     margin-left: auto;
     margin-bottom: 12px;
 }
+
+.delete-message{
+    background:none;
+    border:none;
+    color:#888;
+    cursor:pointer;
+    font-size:13px;
+    margin-left:5px;
+}
+
+.delete-message:hover{
+    color:red;
+}
+
+.message-row{
+    display:flex;
+    align-items:flex-end;
+    margin-bottom:15px;
+}
+
+
+.me-row{
+    justify-content:flex-end;
+    gap:8px;
+}
+
+.other-row{
+    justify-content:flex-start;
+}
+
+.delete-form{
+    margin:0;
+}
+
+.delete-message{
+    border:none;
+    background:none;
+    cursor:pointer;
+    font-size:16px;
+    color:#999;
+}
+
+.delete-message:hover{
+    color:red;
+}
