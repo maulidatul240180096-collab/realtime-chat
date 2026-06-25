@@ -50,6 +50,9 @@ Route::middleware('auth')->group(function () {
 
      Route::post('/message/send', [MessageController::class, 'send']);
 
+     Route::delete('/message/{message}', [MessageController::class, 'destroy'])
+    ->name('message.destroy');
+
         
 });
 
