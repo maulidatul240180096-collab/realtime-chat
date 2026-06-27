@@ -112,8 +112,23 @@
 
 <script>
 window.onload = function() {
+
     let chatBox = document.getElementById('chatBox');
+
     chatBox.scrollTop = chatBox.scrollHeight;
+
+    setInterval(function () {
+
+        fetch('/chat/{{ $user->id }}/messages')
+            .then(response => response.json())
+            .then(data => {
+
+                console.log(data);
+
+            });
+
+    }, 1000);
+
 }
 </script>
 
