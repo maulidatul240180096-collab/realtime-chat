@@ -31,10 +31,28 @@ class ChatController extends Controller
     ]);
         $user = User::findOrFail($userId);
 
-        return view('chat.show', compact('messages', 'user'));
-    }
+   return view('chat.show', compact('messages', 'user'));
+}
 
-    public function index()
+public function getMessages($userId)
+{
+    $authId = Auth::id();
+
+    $messages = Message::where(function ($q) use ($authId, $userId) {
+            $q->where('sender_id', $authId)
+              ->where('receiver_id', $userId);
+        })
+        ->orWhere(function ($q) use ($authId, $userId) {
+            $q->where('sender_id', $userId)
+              ->where('receiver_id', $authId);
+        })
+        ->orderBy('created_at', 'asc')
+        ->get();
+
+    return response()->json($messages);
+}
+
+public function index()
 {
     $authId = Auth::id();
 
@@ -43,7 +61,7 @@ class ChatController extends Controller
         ->orderBy('created_at', 'desc')
         ->get();
 
-    // grouping per lawan chat
+    
     $chats = $messages->groupBy(function ($msg) use ($authId) {
         return $msg->sender_id == $authId
             ? $msg->receiver_id
