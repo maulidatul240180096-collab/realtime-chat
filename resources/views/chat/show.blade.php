@@ -13,16 +13,15 @@
 
     <small>
 
-        @if($user->last_seen && $user->last_seen->diffInMinutes(now()) < 1)
+        @if($user->isOnline())
 
-             Online
+    🟢 Online
 
-        @else
+@else
 
-             Offline
-            {{ $user->last_seen?->diffForHumans() }}
+    ⚫ Offline
 
-        @endif
+@endif
 
     </small>
 
