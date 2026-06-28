@@ -111,23 +111,77 @@
     </form>
 
 <script>
-window.onload = function() {
+window.onload = function () {
 
     let chatBox = document.getElementById('chatBox');
 
-    chatBox.scrollTop = chatBox.scrollHeight;
-
-    setInterval(function () {
+    function loadMessages() {
 
         fetch('/chat/{{ $user->id }}/messages')
             .then(response => response.json())
             .then(data => {
 
-    document.title = "Pesan: " + data.length;
+                document.title = "Pesan: " + data.length;
 
-});
+                let html = '';
 
-    }, 1000);
+                data.forEach(msg => {
+
+                    let jam = new Date(msg.created_at)
+                        .toLocaleTimeString('id-ID', {
+                            hour: '2-digit',
+                            minute: '2-digit'
+                        });
+
+                    if (msg.sender_id == {{ auth()->id() }}) {
+
+                        html += `
+                            <div class="message-row me-row">
+                                <div class="chat-bubble me">
+                                    <div class="message-text">
+                                        ${msg.message}
+                                    </div>
+
+                                    <div class="message-time">
+                                        ${jam}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                    } else {
+
+                        html += `
+                            <div class="message-row other-row">
+                                <div class="chat-bubble other">
+                                    <div class="message-text">
+                                        ${msg.message}
+                                    </div>
+
+                                    <div class="message-time">
+                                        ${jam}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+
+                    }
+
+                });
+
+                chatBox.innerHTML = html;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    }
+
+    loadMessages();
+
+    setInterval(loadMessages, 1000);
 
 }
 </script>
