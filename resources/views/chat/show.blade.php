@@ -123,9 +123,9 @@ window.onload = function() {
             .then(response => response.json())
             .then(data => {
 
-                console.log(data);
+    document.title = "Pesan: " + data.length;
 
-            });
+});
 
     }, 1000);
 
