@@ -42,18 +42,22 @@ Route::middleware('auth')->group(function () {
     Route::post('/contacts', [ContactController::class, 'store'])
         ->name('contacts.store');
 
-    // CHAT
-     Route::get('/chat/{user}', [ChatController::class, 'show'])
-     ->name('chat.show');
+   // CHAT
+Route::get('/chat/{user}', [ChatController::class, 'show'])
+    ->name('chat.show');
 
-    Route::get('/chat/{user}/messages', [ChatController::class, 'getMessages'])
+Route::get('/chat/{user}/messages', [ChatController::class, 'getMessages'])
     ->name('chat.messages');
 
-     Route::get('/chat', [ChatController::class, 'index'])->name('chat.index');
+Route::get('/dashboard/chats', [ChatController::class, 'getChatList'])
+    ->name('dashboard.chats');
 
-     Route::post('/message/send', [MessageController::class, 'send']);
+Route::get('/chat', [ChatController::class, 'index'])
+    ->name('chat.index');
 
-     Route::delete('/message/{message}', [MessageController::class, 'destroy'])
+Route::post('/message/send', [MessageController::class, 'send']);
+
+Route::delete('/message/{message}', [MessageController::class, 'destroy'])
     ->name('message.destroy');
 
         
