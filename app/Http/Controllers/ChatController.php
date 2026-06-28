@@ -55,6 +55,16 @@ class ChatController extends Controller
     }
 
 
+    public function getStatus($userId)
+    {
+        $user = User::findOrFail($userId);
+
+        return response()->json([
+            'online' => $user->isOnline()
+        ]);
+    }
+
+
     public function index()
     {
         $authId = Auth::id();
