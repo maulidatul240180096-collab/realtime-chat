@@ -135,17 +135,51 @@ window.onload = function () {
 
                     if (msg.sender_id == {{ auth()->id() }}) {
 
+                        let checkMark = msg.is_read ? '✓✓' : '✓';
+
                         html += `
                             <div class="message-row me-row">
+
                                 <div class="chat-bubble me">
+
                                     <div class="message-text">
                                         ${msg.message}
                                     </div>
 
                                     <div class="message-time">
-                                        ${jam}
+                                        ${jam} ${checkMark}
                                     </div>
+
                                 </div>
+
+                                <form
+                                    action="/message/${msg.id}"
+                                    method="POST"
+                                    class="delete-form"
+                                    onsubmit="return confirm('Hapus pesan ini?')"
+                                >
+
+                                    <input
+                                        type="hidden"
+                                        name="_token"
+                                        value="{{ csrf_token() }}"
+                                    >
+
+                                    <input
+                                        type="hidden"
+                                        name="_method"
+                                        value="DELETE"
+                                    >
+
+                                    <button
+                                        type="submit"
+                                        class="delete-message"
+                                    >
+                                        🗑
+                                    </button>
+
+                                </form>
+
                             </div>
                         `;
 
@@ -153,7 +187,9 @@ window.onload = function () {
 
                         html += `
                             <div class="message-row other-row">
+
                                 <div class="chat-bubble other">
+
                                     <div class="message-text">
                                         ${msg.message}
                                     </div>
@@ -161,7 +197,9 @@ window.onload = function () {
                                     <div class="message-time">
                                         ${jam}
                                     </div>
+
                                 </div>
+
                             </div>
                         `;
 
@@ -173,9 +211,7 @@ window.onload = function () {
                 chatBox.scrollTop = chatBox.scrollHeight;
 
             })
-            .catch(error => {
-                console.error(error);
-            });
+            .catch(error => console.log(error));
 
     }
 
@@ -185,5 +221,4 @@ window.onload = function () {
 
 }
 </script>
-
 </div>
