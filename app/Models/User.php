@@ -52,8 +52,13 @@ class User extends Authenticatable
         ];
     }
 
-    public function contacts()
+  public function contacts()
 {
     return $this->hasMany(Contact::class);
 }
+
+public function isOnline()
+{
+    return $this->last_seen &&
+           $this->last_seen->diffInSeconds(now()) < 30;
 }
