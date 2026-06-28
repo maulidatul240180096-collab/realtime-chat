@@ -62,3 +62,4 @@ public function isOnline()
     return $this->last_seen &&
            $this->last_seen->diffInSeconds(now()) < 30;
 }
+}
